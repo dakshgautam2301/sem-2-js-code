@@ -261,3 +261,43 @@ function goToPlayground(){
     setTimeout(() => {
     console.log("Going to the playground!");
     }, 1000);
+
+const p=new Promise((resolve,reject)=>{
+    let done=false
+    setTimeout(()=>{
+        if(done){
+            resolve("Homework done!")
+        }else{
+            reject("Homework not done!")
+        }
+    },2000)
+})
+console.log("Starting homework...")
+p.then((message)=>{
+    console.log(message);
+}).catch((error)=>{
+    console.log(error);
+})
+function eatdinner(){
+    return new Promise((resolve)=>{
+        console.log("Starting dinner...");
+        setTimeout(()=>{
+            resolve("Dinner done!")
+        },1500)
+    })}
+function gotoPlayground(){
+    return new Promise((resolve)=>{
+        console.log("Getting ready to go out...");
+        setTimeout(()=>{
+            resolve("Going to the playground!")
+        },1000)
+    })}
+homeworkdone=false
+eatdinner()
+.then((dinnerMessage)=>{
+    console.log(dinnerMessage);
+    return gotoPlayground()
+}   )
+.then((playgroundMessage)=>{
+    console.log(playgroundMessage);
+})          
